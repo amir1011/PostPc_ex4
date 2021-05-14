@@ -2,6 +2,7 @@ package exercise.find.roots;
 
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 
 import junit.framework.TestCase;
 
@@ -47,6 +48,8 @@ public class MainActivityTest extends TestCase {
 
     // test: insert input to the edit text and verify that the button is enabled
     // TODO: implement
+    inputEditText.setText("777");
+    assertTrue(button.isEnabled());
   }
 
   // TODO: add 1 or 2 more unit tests to the activity. so your "writing tests" skill won't get rusty.
@@ -70,4 +73,55 @@ public class MainActivityTest extends TestCase {
   //    create the broadcast intent (example: `new Intent("my_action_here")` ) and put extras
   //    call `RuntimeEnvironment.application.sendBroadcast()` to send the broadcast
   //    call `Shadows.shadowOf(Looper.getMainLooper()).idle();` to let the android OS time to process the broadcast the let your activity consume it
+
+
+  @Test
+  public void when_activityIsLaunching_then_theProgressShouldBeHidden()
+  {
+    MainActivity mainActivity = Robolectric.buildActivity(MainActivity.class).create().visible().get();
+
+    ProgressBar progressBar = mainActivity.findViewById(R.id.progressBar);
+
+    assertFalse(progressBar.isAnimating());
+  }
+
+  @Test
+  public void when_badInput_then_buttonDisabled()
+  {
+    // create a MainActivity and let it think it's currently displayed on the screen
+    MainActivity mainActivity = Robolectric.buildActivity(MainActivity.class).create().visible().get();
+
+    // find the edit-text and the button
+    EditText inputEditText = mainActivity.findViewById(R.id.editTextInputNumber);
+    Button button = mainActivity.findViewById(R.id.buttonCalculateRoots);
+
+    inputEditText.setText("17.3");
+    assertFalse(button.isEnabled());
+
+    inputEditText.setText("-111111");
+    assertFalse(button.isEnabled());
+
+    inputEditText.setText("17+3");
+    assertFalse(button.isEnabled());
+
+//    inputEditText.setText("+173");
+//    assertTrue(button.isEnabled());
+  }
+
+  @Test
+  public void when_goodInput_buttonShouldBeEnabled_then_clearInput_buttonShouldBeDisabled()
+  {
+    // create a MainActivity and let it think it's currently displayed on the screen
+    MainActivity mainActivity = Robolectric.buildActivity(MainActivity.class).create().visible().get();
+
+    // find the edit-text and the button
+    EditText inputEditText = mainActivity.findViewById(R.id.editTextInputNumber);
+    Button button = mainActivity.findViewById(R.id.buttonCalculateRoots);
+
+    inputEditText.setText("11111111111111111");
+    assertTrue(button.isEnabled());
+
+    inputEditText.setText("");
+    assertFalse(button.isEnabled());
+  }
 }
