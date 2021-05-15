@@ -150,46 +150,46 @@ class MainActivity : AppCompatActivity() {
         // TODO: put relevant data into bundle as you see fit
 
         //todo safe if user is editing and what he wrote until now
-        val editTextUserInput = findViewById<EditText>(R.id.editTextInputNumber)
+//        val editTextUserInput = findViewById<EditText>(R.id.editTextInputNumber)
 //        if(editTextUserInput.isEnabled)
 //        {
 //            savedText = editTextUserInput.text.toString()
 //        }
-            outState.putString("currentInput", editTextUserInput.text.toString());
-            outState.putBoolean("isCalculating", isCalculating);
-            outState.putBoolean("isLegalInput", findViewById<Button>(R.id.buttonCalculateRoots).isEnabled);
+//            outState.putString("currentInput", editTextUserInput.text.toString());
+//            outState.putBoolean("isCalculating", isCalculating);
+//            outState.putBoolean("isLegalInput", findViewById<Button>(R.id.buttonCalculateRoots).isEnabled);
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
         // TODO: load data from bundle and set screen state (see spec below)
-        setContentView(R.layout.activity_main)
-        val progressBar = findViewById<ProgressBar>(R.id.progressBar)
-        val editTextUserInput = findViewById<EditText>(R.id.editTextInputNumber)
-        val buttonCalculateRoots = findViewById<Button>(R.id.buttonCalculateRoots)
-
-        isCalculating = savedInstanceState.getBoolean("isCalculating", false)
-        isCalculating = savedInstanceState.getBoolean("isCalculating", false)
-        savedText = savedInstanceState.getString("currentInput", "")
-        editTextUserInput.setText(savedText)
-
-        if (isCalculating)
-        {
-            buttonCalculateRoots.isEnabled = false
-            editTextUserInput.isEnabled = false
-            progressBar.visibility = View.VISIBLE
-            return
-        }
-        if(!savedInstanceState.getBoolean("isLegalInput", false))
-        {
-            buttonCalculateRoots.isEnabled = false
-            editTextUserInput.isEnabled = true
-            progressBar.visibility = View.GONE
-            return
-        }
-        buttonCalculateRoots.isEnabled = true
-        editTextUserInput.isEnabled = true
-        progressBar.visibility = View.GONE
+//        setContentView(R.layout.activity_main)
+//        val progressBar = findViewById<ProgressBar>(R.id.progressBar)
+//        val editTextUserInput = findViewById<EditText>(R.id.editTextInputNumber)
+//        val buttonCalculateRoots = findViewById<Button>(R.id.buttonCalculateRoots)
+//
+//        isCalculating = savedInstanceState.getBoolean("isCalculating", false)
+//        isCalculating = savedInstanceState.getBoolean("isCalculating", false)
+//        savedText = savedInstanceState.getString("currentInput", "")
+//        editTextUserInput.setText(savedText)
+//
+//        if (isCalculating)
+//        {
+//            buttonCalculateRoots.isEnabled = false
+//            editTextUserInput.isEnabled = false
+//            progressBar.visibility = View.VISIBLE
+//            return
+//        }
+//        if(!savedInstanceState.getBoolean("isLegalInput", false))
+//        {
+//            buttonCalculateRoots.isEnabled = false
+//            editTextUserInput.isEnabled = true
+//            progressBar.visibility = View.GONE
+//            return
+//        }
+//        buttonCalculateRoots.isEnabled = true
+//        editTextUserInput.isEnabled = true
+//        progressBar.visibility = View.GONE
     }
 
 
